@@ -1,0 +1,36 @@
+# Mechanical SAM specifications
+
+The memory module is sized to work on perforated steel sheet
+
+The sheet from RS was measured at 494mm across 57 long gaps, so 8.66666 (Recurring) mm between addresses; 495 between 99 short gaps, so 5.0mm between data positions.
+
+The holes are 3mm in diameter and we use 4mm ball bearings.
+
+A lead screw with a pitch which is a multiple of 8.66 mm would be ideal, but not essential - we can fix that with gearing.
+
+Lead screws are commonly used in 3D printers and other CNC machines, and it would be useful to be able to reuse popular components. "T8-2-D8" seems to come up a lot in google searches.
+
+Say, for example: http://www.amazon.com/printer-accessories-T8-2-D8-RepRap-length/dp/B0157PXKOK. There is a 400mm long version available which will allow 
+
+That's a 2mm pitch, so we we will need 4 and 1 third revolutions to move one address. If you feed in from a 3:1 gear reduction, you'll need 13 revolutions. A cam running off this system should also run the rest of the operations.
+
+# External logic
+
+Although the "CPU" isn't part of this project, we need to check that it is reasonable to build it and supply the memory's requirements - particularly the 13-revolution seek and seek enable logic.
+
+A worm gear on the drive shaft can drive a 26 tooth gear; this will have a cam on it which can run seek enable and other functions.
+
+The sequence is: Starting after read has been set up,
+
+* Cycle logic 1
+* Cycle logic 2
+* After logic 2, write should already have been performed. Direction should be set up.
+* Seek. As Cycle logic 2 ends, a cam should move seek enable to set; this will catch the differential as it rotates, and after 13 revolutions, we should unset it.
+* Cycle read power at the end of the seek.
+
+Logic 1, Logic 2 and Seek are the main power-consuming operations.
+
+If a 26T gear doesn't provide enough time/power to run the logic, we can move up to a 39T or 52T gear to provide more movement space for the logic blocks.
+
+Moving up to a larger gear may also help with if you need more than two logic sequences.
+
