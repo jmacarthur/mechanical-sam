@@ -13,4 +13,9 @@ rotate([0,90,0])
   }
 };
 
-ReadHead();
+ReadWriteHead();
+
+
+// Example data
+translate([5,150+40-2.5,-20]) sphere(r=2);
+translate([5,150+40+2.5,-20]) sphere(r=2);
