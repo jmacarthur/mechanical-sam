@@ -76,8 +76,19 @@ module WriteBowdenPlate()
 module FrontPanel()
 {
   union(){
-    SupportPlate();
-    translate([0,-20,20-thin]) cube([3,300+40,40]);
+    rotate([90,0,90]) linear_extrude(height=3) {
+      difference() {
+	union() {
+	  SupportPlate2D();
+	  translate([-20,20-thin]) square([300+40,40]);
+	}
+	for(x=[5,300-5]) {
+	  translate([x,40]) circle(r=1.5);
+	  translate([x,55]) circle(r=1.5);
+	  translate([x-1.5,40]) square([3,15]);
+	}
+      }
+    }
     translate([0, 150+40-15, 40])  WriteBowdenPlate();
   }
 }
