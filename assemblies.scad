@@ -136,17 +136,60 @@ module ReadOutputBar2D()
     union() {
       square([10,300]);
       translate([0,180+40-5])square([20,10]);
+      // Extensions for drive slots
+      for(x=[20, 120, 220]) {
+	translate([-10,x-5]) square([10,20]);
+      }
+
     }
     // Holes for toggles 
     translate([15,180+40]) circle(r=1.5);
     // Dowel holes at each end for slots
     translate([5,5]) circle(r=1.5);
     translate([5,300-5]) circle(r=1.5);
+    // Drive slots
+    for(x=[20, 120, 220]) {
+      translate([-5,x]) circle(r=1.5);
+      translate([-5-1.5,x]) square([3,10]);
+      translate([-5,x+10]) circle(r=1.5);
+    }
   }
 
 }
 
+
+module OutputCrank2D()
+{
+  difference() {
+    union() {
+      polygon(points=[[0,0], [30,0], [30,-30], [20,-30], [0,-10]], polys=[[0,1,2,3,4]]);
+    }
+    translate([5,-5]) circle(r=1.5);
+    translate([25,-5]) circle(r=1.5);
+    translate([25,-25]) circle(r=1.5);
+    translate([25,-20]) circle(r=1.5);
+    translate([25-1.5,-25]) square([3,5]);
+    
+  }
+}
+
+module DriveBar2D()
+{
+  difference() {
+    square([400,10]);
+    for(x=[20,120,220]) {
+      translate([x+25,5]) circle(r=1.5);
+    }
+  }
+}
+
+
 module ReadOutputBar()
 {
   color([0,1.0,0]) rotate([0,90,0]) linear_extrude(height=3) ReadOutputBar2D();
+  for(x=[20,120,220]) {
+    color([0.0,1.0,1.0]) translate([3,x,10]) rotate([90,0,90]) linear_extrude(height=3) OutputCrank2D();
+  }
+  translate([6,0,-20]) rotate([90,0,90]) linear_extrude(height=3) DriveBar2D();
 }
+
