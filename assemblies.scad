@@ -115,7 +115,18 @@ module WriteToggle()
 
 module ReadOutputBar2D()
 {
-  square([10,300]);
+  difference() {
+    union() {
+      square([10,300]);
+      translate([0,180+40-5])square([20,10]);
+    }
+    // Holes for toggles 
+    translate([15,180+40]) circle(r=1.5);
+    // Dowel holes at each end for slots
+    translate([5,5]) circle(r=1.5);
+    translate([5,300-5]) circle(r=1.5);
+  }
+
 }
 
 module ReadOutputBar()
