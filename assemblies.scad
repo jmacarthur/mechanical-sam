@@ -3,24 +3,30 @@ barHoleRadius = sqrt(2*2+2*2);
 
 $fn=20;
 
-module SupportPlate() 
+module SupportPlate2D()
 {
   difference() {
-    translate([0,-20,-20]) cube([3,300+40,40]);
+    translate([-20,-20]) square([300+40,40]);
     // Holes for read rods.
-    translate([-1,40+150,10]) rotate([0,90,0]) cylinder(r=barHoleRadius, h=3+2);
+    translate([40+150,10]) circle(r=barHoleRadius);
     // Holes for write rods.
-    translate([-1,40+180,10]) rotate([0,90,0]) cylinder(r=barHoleRadius, h=3+2);
+    translate([40+180,10]) circle(r=barHoleRadius);
     // Holes for leadscrews.
-    translate([-1,0,0]) rotate([0,90,0]) cylinder(r=4, h=3+2);
-    translate([-1,300,0]) rotate([0,90,0]) cylinder(r=4, h=3+2);
+    translate([0,0]) cylinder(r=4);
+    translate([300,0]) cylinder(r=4);
+
   }
+}
+
+module SupportPlate() 
+{
+  rotate([90,0,90]) linear_extrude(height=3) SupportPlate2D();
 }
 
 module ReadWriteHead()
 {
   SupportPlate();
-  //color([1.0,1.0,0.0,0.5]) translate([12,0,0]) SupportPlate();
+  color([1.0,1.0,0.0,0.5]) translate([12,0,0]) SupportPlate();
   translate([4,40+180,10])   rotate([6,0,0]) ReadHead();
   translate([8,40+150,10]) WriteHead();
 }
