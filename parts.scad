@@ -24,5 +24,6 @@ module LeadScrewNut()
 
 module LeadScrew()
 {
-  cylinder(r=4, h=300);
+  cylinder(r=4, h=400);
 }
+
