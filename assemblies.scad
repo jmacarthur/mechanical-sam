@@ -11,7 +11,7 @@ module SupportPlate2D()
     // Holes for write rods.
     translate([40+150,10]) circle(r=barHoleRadius);
     // Holes for read rods.
-    translate([30+180,0]) circle(r=barHoleRadius);
+    translate([40+180+readHeadAdjustY,0]) circle(r=barHoleRadius);
     // Holes for leadscrews.
     translate([0,0]) cylinder(r=4);
     translate([300,0]) cylinder(r=4);
@@ -28,7 +28,7 @@ module ReadWriteHead()
 {
   SupportPlate();
   //color([1.0,1.0,0.0,0.5]) translate([12,0,0]) SupportPlate();
-  translate([4,30+180,0]) rotate([readBarRotate,0,0]) ReadHead();
+  translate([4,40+180+readHeadAdjustY,0]) rotate([readBarRotate,0,0]) ReadHead();
   translate([8,40+150,10]) WriteHead();
 }
 
