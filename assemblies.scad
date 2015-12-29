@@ -57,7 +57,7 @@ module WriteHead2D()
 
 module WriteHead()
 {
-  color([0.0,0.1,1.0,0.5]) rotate([-90,0,0]) rotate ([0,90,0]) linear_extrude(height=3) WriteHead2D();
+  color([0.0,0.1,1.0,0.5]) rotate([-90+writeBarRotate,0,0]) rotate ([0,90,0]) linear_extrude(height=3) WriteHead2D();
 }
 
 module EndPlate() 
