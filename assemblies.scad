@@ -68,33 +68,40 @@ module EndPlate()
 module WriteBowdenPlate()
 {
   difference() {
-    cube([18,30,3]);
-    translate([3+9+1.5,5,-thin]) cylinder(r=1, h=3+2*thin);
-    translate([3+9+1.5,25,-thin]) cylinder(r=1, h=3+2*thin);
+    cube([30,50,3]);
+    translate([3+15,5,-thin]) cylinder(r=1, h=3+2*thin);
+    translate([3+15,25,-thin]) cylinder(r=1, h=3+2*thin);
+    translate([3+9,20,-thin]) cylinder(r=1, h=3+2*thin);
+    translate([3+9,40,-thin]) cylinder(r=1, h=3+2*thin);
+  }
+}
+
+
+module FrontPanel2D()
+{
+  difference() {
+    union() {
+      SupportPlate2D();
+      translate([-20,20-thin]) square([300+40,50]);
+    }
+    for(x=[5,300-5]) {
+      translate([x,40]) circle(r=1.5);
+      translate([x,55]) circle(r=1.5);
+      translate([x-1.5,40]) square([3,15]);
+    }
+    // Holes for crank axles
+    for(x=[20,120,220]) {
+      translate([x+25+outputDriveOffset,65]) circle(r=1.5);
+    }
   }
 }
 
 module FrontPanel()
 {
   union(){
-    rotate([90,0,90]) linear_extrude(height=3) {
-      difference() {
-	union() {
-	  SupportPlate2D();
-	  translate([-20,20-thin]) square([300+40,50]);
-	}
-	for(x=[5,300-5]) {
-	  translate([x,40]) circle(r=1.5);
-	  translate([x,55]) circle(r=1.5);
-	  translate([x-1.5,40]) square([3,15]);
-	}
-	// Holes for crank axles
-	for(x=[20,120,220]) {
-	  translate([x+25+outputDriveOffset,65]) circle(r=1.5);
-	}
-      }
-    }
-    translate([0, 150+40-15, 60])  WriteBowdenPlate();
+    rotate([90,0,90]) linear_extrude(height=3) FrontPanel2D();
+    //translate([21,0,0]) rotate([90,0,90]) linear_extrude(height=3) FrontPanel2D();
+    translate([0, 150+40+readHeadAdjustY, 60])  WriteBowdenPlate();
   }
 }
 
