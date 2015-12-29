@@ -27,8 +27,8 @@ module SupportPlate()
 module ReadWriteHead()
 {
   SupportPlate();
-  color([1.0,1.0,0.0,0.5]) translate([12,0,0]) SupportPlate();
-  translate([4,40+180,10])   rotate([6,0,0]) ReadHead();
+  //color([1.0,1.0,0.0,0.5]) translate([12,0,0]) SupportPlate();
+  translate([4,40+180,10]) rotate([readBarRotate,0,0]) ReadHead();
   translate([8,40+150,10]) WriteHead();
 }
 
