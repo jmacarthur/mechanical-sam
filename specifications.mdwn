@@ -34,3 +34,20 @@ If a 26T gear doesn't provide enough time/power to run the logic, we can move up
 
 Moving up to a larger gear may also help with if you need more than two logic sequences.
 
+
+# Another possibility for sequencing
+
+It's possible we could run our own 13:1 reduction gear off the lead screws, and use this to sequence the read arm... although 13:1 is quite a big reduction. The seqeuncer would then lift the read arm, move 8.66mm then drop it and cycle the output drive; it can then even disengage the memory drive, if necessary. That would mean the only actions needed by the rest of the logic would be to set up the direction and engage the drive. This might be worth considering for a later version, but for now, I think we should just keep one camshaft in the main logic system and use bowden cables to operate the output bar.
+
+
+Straight-cut gear sizes, mod 1:
+
+10T: PCD = 11mm
+At 12T and above PCD in mm is equal to the number of teeth.
+
+Thus, 15 and 45 would work.
+
+# Reverse gear
+
+A 15T input gear, with two 20T idlers, and a 45T output gear was tried; this will work fine if the second idler is rotated close to the output gear. The movement angle between forward and reverse would be about 20 degrees.
+
