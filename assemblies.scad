@@ -68,9 +68,9 @@ module EndPlate()
 module WriteBowdenPlate()
 {
   difference() {
-    cube([10,30,3]);
-    translate([5,5,-thin]) cylinder(r=1, h=3+2*thin);
-    translate([5,25,-thin]) cylinder(r=1, h=3+2*thin);
+    cube([15,30,3]);
+    translate([3+6+1.5,5,-thin]) cylinder(r=1, h=3+2*thin);
+    translate([3+6+1.5,25,-thin]) cylinder(r=1, h=3+2*thin);
   }
 }
 
@@ -93,7 +93,7 @@ module FrontPanel()
 	}
       }
     }
-    translate([0, 150+40-15, 40])  WriteBowdenPlate();
+    translate([0, 150+40-15, 30])  WriteBowdenPlate();
   }
 }
 
@@ -131,7 +131,7 @@ module WriteToggle2D()
 
 module WriteToggle()
 {
-  color([0,0,1.0]) rotate([0,90,0]) linear_extrude(height=3) WriteToggle2D();
+  color([0,0,1.0]) translate([6,0,0]) rotate([0,90,0]) linear_extrude(height=3) WriteToggle2D();
 }
 
 module ReadOutputBar2D()
@@ -208,8 +208,8 @@ module ReadOutputBar()
   color([0,1.0,0]) rotate([0,90,0]) linear_extrude(height=3) ReadOutputBar2D();
   for(x=[20,120,220]) {
     color([0.0,1.0,1.0]) translate([3,x+outputDriveOffset,10]) rotate([90,0,90]) linear_extrude(height=3) OutputCrank2D();
-    translate([6,x,-15]) rotate([90,0,90]) linear_extrude(height=3) OutputToggle2D();
+    translate([3,x,-15]) rotate([90,0,90]) linear_extrude(height=3) OutputToggle2D();
   }
-  translate([6+20,0,-20]) rotate([90,0,90]) linear_extrude(height=3) DriveBar2D();
+  translate([9,0,-17.5]) rotate([90,0,90]) linear_extrude(height=3) DriveBar2D();
 }
 
