@@ -33,6 +33,6 @@ translate([0,0,0]) EndPlate();
 translate([0,150+40-2,10-2]) cube([400,4,4]);
 translate([0,180+40-2,10-2]) cube([400,4,4]);
 
-translate([304,180+40,10]) rotate([7,0,0]) ReadToggle();
+translate([300+10,180+40,10]) rotate([7,0,0]) ReadToggle();
 translate([304,0,60]) ReadOutputBar();
 translate([304,150+40,10]) WriteToggle();

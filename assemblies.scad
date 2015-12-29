@@ -1,5 +1,6 @@
 include <globals.scad>
 barHoleRadius = sqrt(2*2+2*2);
+outputDriveOffset = 20; // Amount drive slots (top of output bar) are offset from the toggles they drive below
 
 $fn=20;
 
@@ -80,12 +81,15 @@ module FrontPanel()
       difference() {
 	union() {
 	  SupportPlate2D();
-	  translate([-20,20-thin]) square([300+40,40]);
+	  translate([-20,20-thin]) square([300+40,50]);
 	}
 	for(x=[5,300-5]) {
 	  translate([x,40]) circle(r=1.5);
 	  translate([x,55]) circle(r=1.5);
 	  translate([x-1.5,40]) square([3,15]);
+	}
+	for(x=[20,120,220]) {
+	  translate([x+25,65]) circle(r=1.5);
 	}
       }
     }
@@ -135,23 +139,25 @@ module ReadOutputBar2D()
   difference() {
     union() {
       square([10,300]);
-      translate([0,180+40-5])square([20,10]);
       // Extensions for drive slots
       for(x=[20, 120, 220]) {
-	translate([-10,x-5]) square([10,20]);
+	translate([-10,x-5+outputDriveOffset]) square([10,20]);
+	translate([0,x-5])square([20,10]);
       }
 
     }
-    // Holes for toggles 
-    translate([15,180+40]) circle(r=1.5);
+    for(x=[20,120,220]) {
+      // Holes for toggles 
+      translate([15,x]) circle(r=1.5);
+    }
     // Dowel holes at each end for slots
     translate([5,5]) circle(r=1.5);
     translate([5,300-5]) circle(r=1.5);
     // Drive slots
     for(x=[20, 120, 220]) {
-      translate([-5,x]) circle(r=1.5);
-      translate([-5-1.5,x]) square([3,10]);
-      translate([-5,x+10]) circle(r=1.5);
+      translate([-5,x+outputDriveOffset]) circle(r=1.5);
+      translate([-5-1.5,x+outputDriveOffset]) square([3,10]);
+      translate([-5,x+10+outputDriveOffset]) circle(r=1.5);
     }
   }
 
@@ -178,18 +184,32 @@ module DriveBar2D()
   difference() {
     square([400,10]);
     for(x=[20,120,220]) {
-      translate([x+25,5]) circle(r=1.5);
+      translate([x+25+outputDriveOffset,5]) circle(r=1.5);
     }
   }
 }
 
+module OutputToggle2D()
+{
+  difference() {
+    union() {
+      translate([-10,0]) circle(r=5);
+      translate([10,0]) circle(r=5);
+      translate([-10,-5]) square([20,10]);
+    }
+    for(x=[-10,0,10]) {
+      translate([x,0]) circle(r=1.5);
+    }
+  }
+}
 
 module ReadOutputBar()
 {
   color([0,1.0,0]) rotate([0,90,0]) linear_extrude(height=3) ReadOutputBar2D();
   for(x=[20,120,220]) {
-    color([0.0,1.0,1.0]) translate([3,x,10]) rotate([90,0,90]) linear_extrude(height=3) OutputCrank2D();
+    color([0.0,1.0,1.0]) translate([3,x+outputDriveOffset,10]) rotate([90,0,90]) linear_extrude(height=3) OutputCrank2D();
+    translate([6,x,-15]) rotate([90,0,90]) linear_extrude(height=3) OutputToggle2D();
   }
-  translate([6,0,-20]) rotate([90,0,90]) linear_extrude(height=3) DriveBar2D();
+  translate([6+20,0,-20]) rotate([90,0,90]) linear_extrude(height=3) DriveBar2D();
 }
 
