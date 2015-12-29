@@ -1,6 +1,6 @@
 thin = 0.01;
 
-readBarRotate = 20; // Min 10, Max 20ish?
+readBarRotate = 10; // Min 10, Max 20ish?
 writeBarRotate = 12; // +/- 12 degrees; should be zero to move.
 
 readHeadAdjustY = -13;

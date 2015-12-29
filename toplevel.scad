@@ -31,9 +31,9 @@ translate([0,0,0]) EndPlate();
 translate([0,150+40,10]) rotate([writeBarRotate,0,0 ]) translate([0,-2,-2]) cube([400,4,4]); // Write.
 translate([0,180+40+readHeadAdjustY,0]) rotate([readBarRotate, 0, 0]) translate([0,-2,-2]) cube([400,4,4]); // Read
 
-translate([300+7,180+40+readHeadAdjustY,0]) rotate([readBarRotate,0,0]) ReadToggle();
+translate([300+10,180+40+readHeadAdjustY,0]) rotate([readBarRotate,0,0]) ReadToggle();
 translate([304,0,60]) ReadOutputBar();
-translate([307,150+40,10]) rotate([writeBarRotate]) WriteToggle();
+translate([310,150+40,10]) rotate([writeBarRotate]) WriteToggle();
 
 // The grid (floor)
 translate([-500,-500,-20-2-bbRadius+bbHeight]) color([0.5,0.5,0.5]) cube([1000,1000,2]);
