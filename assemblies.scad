@@ -36,7 +36,7 @@ module ReadHead2D()
 {
   difference() {
     translate([-5,-5])
-    polygon(points= [[0,0], [20,0], [26,20], [23,20], [15,10], [0,10]], paths = [[0,1,2,3,4,5]]);
+    polygon(points= [[0,0], [20,0], [24,20], [21,20], [15,10], [0,10]], paths = [[0,1,2,3,4,5]]);
     translate([-2,-2]) square(size=[4,4]);
   }
 }
@@ -50,7 +50,7 @@ module WriteHead2D()
 {
   difference() {
     translate([0,0])
-      polygon(points= [[-15,-5], [15,-5], [9,30], [6,30], [6,5], [-6,5], [-6,30], [-9,30]], paths = [[0,1,2,3,4,5,6,7]]);
+      polygon(points= [[-15,-5], [15,-5], [9,28], [6,30], [6,5], [-6,5], [-6,30], [-9,28]], paths = [[0,1,2,3,4,5,6,7]]);
     translate([-2,-2]) square(size=[4,4]);
   }
 }
@@ -68,9 +68,9 @@ module EndPlate()
 module WriteBowdenPlate()
 {
   difference() {
-    cube([15,30,3]);
-    translate([3+6+1.5,5,-thin]) cylinder(r=1, h=3+2*thin);
-    translate([3+6+1.5,25,-thin]) cylinder(r=1, h=3+2*thin);
+    cube([18,30,3]);
+    translate([3+9+1.5,5,-thin]) cylinder(r=1, h=3+2*thin);
+    translate([3+9+1.5,25,-thin]) cylinder(r=1, h=3+2*thin);
   }
 }
 
@@ -103,9 +103,10 @@ module ReadToggle2D()
     difference() {
       rotate(-14.5) { // Adjust this so it's halfway into the range of rotation of the read head
 	union() {
-	  translate([-20,0]) rotate(45) square([sqrt(5*5*2),sqrt(5*5*2)], center=true);
-	  translate([ 10,0]) circle(r=5);
-	  translate([-20,-5]) square([30,10]);
+	  polygon(points=[[-35,-20], [-35,-15], [-30,-15], [-20,0], [-30,15], [-35,15], [-35,20], [20,5], [20,-5]], paths = [[0,1,2,3,4,5,6,7,8]]);
+	  //translate([-20,0]) rotate(45) square([sqrt(5*5*2),sqrt(5*5*2)], center=true);
+	  //translate([ 10,0]) circle(r=5);
+	  //translate([-20,-5]) square([30,10]);
 	  translate([-0,-15]) square([5,30]); // Travel lifting bar
 	}
       }
@@ -145,12 +146,12 @@ module ReadOutputBar2D()
       // Extensions for drive slots
       for(x=[20, 120, 220]) {
 	translate([-10,x-5+outputDriveOffset]) square([10,20]);
-	translate([0,x-15])square([20,10]);
+	translate([0,x-5+readHeadAdjustY])square([20,10]);
       }
     }
     for(x=[20,120,220]) {
       // Holes for toggles 
-      translate([15,x-10]) circle(r=1.5);
+      translate([15,x+readHeadAdjustY]) circle(r=1.5);
     }
     // Dowel holes at each end for slots
     translate([5,5]) circle(r=1.5);
@@ -198,6 +199,7 @@ module OutputToggle2D()
       translate([-10,0]) circle(r=5);
       translate([10,0]) circle(r=5);
       translate([-10,-5]) square([20,10]);
+      translate([-15,-5]) square([30,5]);
     }
     for(x=[-10,0,10]) {
       translate([x,0]) circle(r=1.5);
@@ -210,8 +212,7 @@ module ReadOutputBar()
   color([0,1.0,0]) rotate([0,90,0]) linear_extrude(height=3) ReadOutputBar2D();
   for(x=[20,120,220]) {
     color([0.0,1.0,1.0]) translate([3,x+outputDriveOffset,10]) rotate([90,0,90]) linear_extrude(height=3) OutputCrank2D();
-    translate([3,x-10,-15]) rotate([90,0,90]) linear_extrude(height=3) OutputToggle2D();
+    translate([3,x+readHeadAdjustY,-15]) rotate([90,0,90]) linear_extrude(height=3) OutputToggle2D();
   }
   translate([9,0,-17.5]) rotate([90,0,90]) linear_extrude(height=3) DriveBar2D();
 }
-
