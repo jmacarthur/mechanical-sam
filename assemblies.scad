@@ -88,8 +88,9 @@ module FrontPanel()
 	  translate([x,55]) circle(r=1.5);
 	  translate([x-1.5,40]) square([3,15]);
 	}
+	// Holes for crank axles
 	for(x=[20,120,220]) {
-	  translate([x+25,65]) circle(r=1.5);
+	  translate([x+25+outputDriveOffset,65]) circle(r=1.5);
 	}
       }
     }
