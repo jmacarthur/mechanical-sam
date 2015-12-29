@@ -24,7 +24,7 @@ translate([100,0,0]) ReadWriteHead();
 translate([105,150+40-2.5,-20]) sphere(r=2);
 translate([105,150+40+2.5,-20]) sphere(r=2);
 
-//translate([300,0,0]) FrontPanel();
+translate([300,0,0]) FrontPanel();
 translate([0,0,0]) EndPlate();
 
 // Read and write bars

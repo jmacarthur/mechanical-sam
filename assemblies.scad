@@ -93,7 +93,7 @@ module FrontPanel()
 	}
       }
     }
-    translate([0, 150+40-15, 30])  WriteBowdenPlate();
+    translate([0, 150+40-15, 60])  WriteBowdenPlate();
   }
 }
 
@@ -103,10 +103,7 @@ module ReadToggle2D()
     difference() {
       rotate(-14.5) { // Adjust this so it's halfway into the range of rotation of the read head
 	union() {
-	  polygon(points=[[-35,-20], [-35,-15], [-30,-15], [-20,0], [-30,15], [-35,15], [-35,20], [20,5], [20,-5]], paths = [[0,1,2,3,4,5,6,7,8]]);
-	  //translate([-20,0]) rotate(45) square([sqrt(5*5*2),sqrt(5*5*2)], center=true);
-	  //translate([ 10,0]) circle(r=5);
-	  //translate([-20,-5]) square([30,10]);
+	  polygon(points=[[-35,-20], [-35,-15], [-30,-15], [-20,0], [-30,15], [-35,15], [-35,20], [15,1], [15,-1]], paths = [[0,1,2,3,4,5,6,7,8]]);
 	  translate([-0,-15]) square([5,30]); // Travel lifting bar
 	}
       }
@@ -214,5 +211,5 @@ module ReadOutputBar()
     color([0.0,1.0,1.0]) translate([3,x+outputDriveOffset,10]) rotate([90,0,90]) linear_extrude(height=3) OutputCrank2D();
     translate([3,x+readHeadAdjustY,-15]) rotate([90,0,90]) linear_extrude(height=3) OutputToggle2D();
   }
-  translate([9,0,-17.5]) rotate([90,0,90]) linear_extrude(height=3) DriveBar2D();
+  translate([12,0,-17.5]) rotate([90,0,90]) linear_extrude(height=3) DriveBar2D();
 }
