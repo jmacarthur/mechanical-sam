@@ -8,10 +8,12 @@ module SupportPlate2D()
 {
   difference() {
     translate([-20,-20]) square([300+40,40]);
-    // Holes for write rods.
-    translate([bit0Y,10]) circle(r=barHoleRadius);
-    // Holes for read rods.
-    translate([bit0Y+30+readHeadAdjustY,0]) circle(r=barHoleRadius);
+    for(bit=[0,1,2]) {
+      // Holes for write rods.
+      translate([bit*bitSpacing+bit0Y,10]) circle(r=barHoleRadius);
+      // Holes for read rods.
+      translate([bit*bitSpacing+bit0Y+30+readHeadAdjustY,0]) circle(r=barHoleRadius);
+    }
     // Holes for leadscrews.
     translate([0,0]) cylinder(r=4);
     translate([300,0]) cylinder(r=4);
@@ -27,8 +29,10 @@ module ReadWriteHead()
 {
   SupportPlate();
   //color([1.0,1.0,0.0,0.5]) translate([12,0,0]) SupportPlate();
-  translate([4,bit0Y+30+readHeadAdjustY,0]) rotate([readBarRotate,0,0]) ReadHead();
-  translate([8,bit0Y,10]) WriteHead();
+  for(bit=[0,1,2]) {
+    translate([4,bit*bitSpacing+bit0Y+30+readHeadAdjustY,0]) rotate([readBarRotate,0,0]) ReadHead();
+    translate([8,bit*bitSpacing+bit0Y,10]) WriteHead();
+  }
 }
 
 module ReadHead2D() 
@@ -101,7 +105,7 @@ module FrontPanel()
     rotate([90,0,90]) linear_extrude(height=3) FrontPanel2D();
     //translate([27,0,0]) rotate([90,0,90]) linear_extrude(height=3) FrontPanel2D();
     for(bit=[0,1,2]) 
-      translate([0, bit*bitSpacing+bit0Y+readHeadAdjustY, 60])  WriteBowdenPlate();
+      translate([0, bit*bitSpacing+bit0Y+readHeadAdjustY, 70])  WriteBowdenPlate();
   }
 }
 
