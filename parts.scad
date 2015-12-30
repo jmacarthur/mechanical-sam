@@ -27,3 +27,12 @@ module LeadScrew()
   cylinder(r=4, h=400);
 }
 
+// Other parts, not modelled:
+
+/* Hexagon pattern perforated steel sheet:
+   http://uk.rs-online.com/web/p/perforated-steel-sheets/0817448
+   When used as a rectangular grid, it's 5mm between the spaces on the 
+   short axis, and 8.666mm between spaces on the long axis.
+   Hexagon grid is used because no appropriate square pattern grid exists. */
+
+
