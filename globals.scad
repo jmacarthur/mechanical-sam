@@ -34,4 +34,4 @@ bbHeight = sqrt(bbRadius*bbRadius - halfHoleDiameter * halfHoleDiameter);
 
 
 bit0Y = 30; // Y pos, centre of write axis (mid-way Y between the two states)
-bitSpacing = 80;
+bitSpacing = 100;

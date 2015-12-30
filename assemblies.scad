@@ -1,6 +1,6 @@
 include <globals.scad>
 barHoleRadius = sqrt(2*2+2*2);
-outputDriveOffset = 20; // Amount drive slots (top of output bar) are offset from the toggles they drive below
+outputDriveOffset = 15; // Amount drive slots (top of output bar) are offset from the toggles they drive below
 
 $fn=20;
 
@@ -100,7 +100,8 @@ module FrontPanel()
   union(){
     rotate([90,0,90]) linear_extrude(height=3) FrontPanel2D();
     //translate([27,0,0]) rotate([90,0,90]) linear_extrude(height=3) FrontPanel2D();
-    translate([0, bit0Y+readHeadAdjustY, 60])  WriteBowdenPlate();
+    for(bit=[0,1,2]) 
+      translate([0, bit*bitSpacing+bit0Y+readHeadAdjustY, 60])  WriteBowdenPlate();
   }
 }
 
@@ -193,8 +194,8 @@ module DriveBar2D()
   difference() {
     union() {
       for(bit=[0,1,2]) {
-	translate([bit*bitSpacing,0]) polygon(points=[[0,5], [bitSpacing/3,5], [bitSpacing/3+5,0], [bitSpacing-5,0], [bitSpacing,5], [bitSpacing, 15], [bitSpacing-5,10], [bitSpacing/3+5,10], [bitSpacing/3,15],[0,15]
-						      ], polys=[[0,1,2,3,4,5,6,7,8,9]]);
+	translate([bit*bitSpacing,0]) polygon(points=[[0,5], [10,5], [15,0], [bitSpacing-5,0], [bitSpacing,5], [bitSpacing, 15], [bitSpacing-10,15], [bitSpacing-15,10], [20,10], [15,15],[0,15]
+						      ], polys=[[0,1,2,3,4,5,6,7,8,9,10]]);
       }
     }
     for(bit=[0,1,2]) {
