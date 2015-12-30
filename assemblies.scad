@@ -151,7 +151,7 @@ module ReadOutputBar2D()
       translate([0,bit0Y]) for(bit=[0,1,2]) {
 	translate([-10,bit*bitSpacing-5+30+outputDriveOffset]) square([10,20]);
 	translate([0,bit*bitSpacing-5+30+readHeadAdjustY])square([20,10]);
-	translate([5,bit*BitSpacing-2.5+30+readHeadAdjustY-10])square([65,5]);
+	translate([5,bit*bitSpacing-2.5+30+readHeadAdjustY-10])square([65,5]);
       }
     }
     translate([0,bit0Y]) for(bit=[0,1,2]) {
@@ -192,12 +192,13 @@ module DriveBar2D()
 {
   difference() {
     union() {
-      for(x=[20,120,220]) {
-	translate([x,0]) polygon(points=[[0,0], [55,0], [60,5], [95,5], [100,0], [110,0], [110,10], [105,15], [30,15], [25,10], [0,10]], polys=[[0,1,2,3,4,5,6,7,8,9,10,11]]);
+      for(bit=[0,1,2]) {
+	translate([bit*bitSpacing,0]) polygon(points=[[0,5], [bitSpacing/3,5], [bitSpacing/3+5,0], [bitSpacing-5,0], [bitSpacing,5], [bitSpacing, 15], [bitSpacing-5,10], [bitSpacing/3+5,10], [bitSpacing/3,15],[0,15]
+						      ], polys=[[0,1,2,3,4,5,6,7,8,9]]);
       }
     }
-    for(x=[0,100,200]) {
-      translate([x+45+outputDriveOffset,5]) circle(r=1.5);
+    for(bit=[0,1,2]) {
+      translate([bit*bitSpacing+45+outputDriveOffset,5]) circle(r=1.5);
     }
   }
 }

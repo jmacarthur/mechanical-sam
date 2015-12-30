@@ -34,7 +34,7 @@ for(bit=[0,1,2]) {
 
   translate([300+10,bit0Y+30+readHeadAdjustY+bit*bitSpacing,0]) rotate([readBarRotate,0,0]) ReadToggle();
   translate([310,bit0Y+bit*bitSpacing,10]) rotate([writeBarRotate]) WriteToggle();
- }
+}
 
 translate([304,0,60]) ReadOutputBar();
 
