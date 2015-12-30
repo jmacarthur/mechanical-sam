@@ -27,13 +27,16 @@ translate([105,bit0Y+2.5,-20]) sphere(r=2);
 translate([300,0,0]) FrontPanel();
 translate([0,0,0]) EndPlate();
 
-// Read and write bars
-translate([0,bit0Y,10]) rotate([writeBarRotate,0,0 ]) translate([0,-2,-2]) cube([400,4,4]); // Write.
-translate([0,bit0Y+30+readHeadAdjustY,0]) rotate([readBarRotate, 0, 0]) translate([0,-2,-2]) cube([400,4,4]); // Read
+for(bit=[0,1,2]) {
+  // Read and write bars
+  translate([0,bit0Y+bit*bitSpacing,10]) rotate([writeBarRotate,0,0 ]) translate([0,-2,-2]) cube([400,4,4]); // Write.
+  translate([0,bit0Y+30+readHeadAdjustY+bit*bitSpacing,0]) rotate([readBarRotate, 0, 0]) translate([0,-2,-2]) cube([400,4,4]); // Read
 
-translate([300+10,bit0Y+30+readHeadAdjustY,0]) rotate([readBarRotate,0,0]) ReadToggle();
+  translate([300+10,bit0Y+30+readHeadAdjustY+bit*bitSpacing,0]) rotate([readBarRotate,0,0]) ReadToggle();
+  translate([310,bit0Y+bit*bitSpacing,10]) rotate([writeBarRotate]) WriteToggle();
+ }
+
 translate([304,0,60]) ReadOutputBar();
-translate([310,bit0Y,10]) rotate([writeBarRotate]) WriteToggle();
 
 // The grid (floor)
 translate([-500,-500,-20-2-bbRadius+bbHeight]) color([0.5,0.5,0.5]) cube([1000,1000,2]);
