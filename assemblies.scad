@@ -9,13 +9,12 @@ module SupportPlate2D()
   difference() {
     translate([-20,-20]) square([300+40,40]);
     // Holes for write rods.
-    translate([40+150,10]) circle(r=barHoleRadius);
+    translate([bit0Y,10]) circle(r=barHoleRadius);
     // Holes for read rods.
-    translate([40+180+readHeadAdjustY,0]) circle(r=barHoleRadius);
+    translate([bit0Y+30+readHeadAdjustY,0]) circle(r=barHoleRadius);
     // Holes for leadscrews.
     translate([0,0]) cylinder(r=4);
     translate([300,0]) cylinder(r=4);
-
   }
 }
 
@@ -28,8 +27,8 @@ module ReadWriteHead()
 {
   SupportPlate();
   //color([1.0,1.0,0.0,0.5]) translate([12,0,0]) SupportPlate();
-  translate([4,40+180+readHeadAdjustY,0]) rotate([readBarRotate,0,0]) ReadHead();
-  translate([8,40+150,10]) WriteHead();
+  translate([4,bit0Y+30+readHeadAdjustY,0]) rotate([readBarRotate,0,0]) ReadHead();
+  translate([8,bit0Y,10]) WriteHead();
 }
 
 module ReadHead2D() 
@@ -90,8 +89,8 @@ module FrontPanel2D()
       translate([x-1.5,40]) square([3,15]);
     }
     // Holes for crank axles
-    for(x=[20,120,220]) {
-      translate([x+25+outputDriveOffset,65]) circle(r=1.5);
+    translate([0,bit0Y,0]) for(x=[0]) {
+      translate([x+30+25+outputDriveOffset,65]) circle(r=1.5);
     }
   }
 }
@@ -100,8 +99,8 @@ module FrontPanel()
 {
   union(){
     rotate([90,0,90]) linear_extrude(height=3) FrontPanel2D();
-    translate([27,0,0]) rotate([90,0,90]) linear_extrude(height=3) FrontPanel2D();
-    translate([0, 150+40+readHeadAdjustY, 60])  WriteBowdenPlate();
+    //translate([27,0,0]) rotate([90,0,90]) linear_extrude(height=3) FrontPanel2D();
+    translate([0, bit0Y+readHeadAdjustY, 60])  WriteBowdenPlate();
   }
 }
 
@@ -149,26 +148,26 @@ module ReadOutputBar2D()
     union() {
       square([10,300]);
       // Extensions for drive slots
-      for(x=[20, 120, 220]) {
-	translate([-10,x-5+outputDriveOffset]) square([10,20]);
-	translate([0,x-5+readHeadAdjustY])square([20,10]);
-	translate([5,x-2.5+readHeadAdjustY-10])square([65,5]);
+      translate([0,bit0Y]) for(x=[0]) {
+	translate([-10,x-5+30+outputDriveOffset]) square([10,20]);
+	translate([0,x-5+30+readHeadAdjustY])square([20,10]);
+	translate([5,x-2.5+30+readHeadAdjustY-10])square([65,5]);
       }
     }
-    for(x=[20,120,220]) {
+    translate([0,bit0Y]) for(x=[0]) {
       // Holes for toggles 
-      translate([15,x+readHeadAdjustY]) circle(r=1.5);
+      translate([15,x+30+readHeadAdjustY]) circle(r=1.5);
       // Hole for transit read raiser pin
-      translate([66,x+readHeadAdjustY-10]) circle(r=1.5);
+      translate([66,x+30+readHeadAdjustY-10]) circle(r=1.5);
     }
     // Dowel holes at each end for slots
     translate([5,5]) circle(r=1.5);
     translate([5,300-5]) circle(r=1.5);
     // Drive slots
-    for(x=[20, 120, 220]) {
-      translate([-5,x+outputDriveOffset]) circle(r=1.5);
-      translate([-5-1.5,x+outputDriveOffset]) square([3,10]);
-      translate([-5,x+10+outputDriveOffset]) circle(r=1.5);
+    translate([0,bit0Y]) for(x=[0]) {
+      translate([-5,x+30+outputDriveOffset]) circle(r=1.5);
+      translate([-5-1.5,x+30+outputDriveOffset]) square([3,10]);
+      translate([-5,x+30+10+outputDriveOffset]) circle(r=1.5);
     }
   }
 
@@ -222,11 +221,11 @@ module OutputToggle2D()
 module ReadOutputBar()
 {
   color([0,1.0,0]) rotate([0,90,0]) linear_extrude(height=3) ReadOutputBar2D();
-  color([0,1.0,0]) translate([21,0,0]) rotate([0,90,0]) linear_extrude(height=3) ReadOutputBar2D();
-  for(x=[20,120,220]) {
-    color([0.0,1.0,1.0]) translate([3,x+outputDriveOffset,10]) rotate([90,0,90]) linear_extrude(height=3) OutputCrank2D();
-    color([0.0,1.0,1.0]) translate([18,x+outputDriveOffset,10]) rotate([90,0,90]) linear_extrude(height=3) OutputCrank2D();
-    translate([6,x+readHeadAdjustY,-15]) rotate([90,0,90]) linear_extrude(height=3) OutputToggle2D();
+  //color([0,1.0,0]) translate([21,0,0]) rotate([0,90,0]) linear_extrude(height=3) ReadOutputBar2D();
+  translate([0,bit0Y,0]) for(x=[0]) {
+    color([0.0,1.0,1.0]) translate([3,x+30+outputDriveOffset,10]) rotate([90,0,90]) linear_extrude(height=3) OutputCrank2D();
+    //color([0.0,1.0,1.0]) translate([18,x-30+outputDriveOffset,10]) rotate([90,0,90]) linear_extrude(height=3) OutputCrank2D();
+    translate([6,x+30+readHeadAdjustY,-15]) rotate([90,0,90]) linear_extrude(height=3) OutputToggle2D();
   }
-  translate([15,0,-17.5]) color([1.0,0.0,1.0]) rotate([90,0,90]) linear_extrude(height=3) DriveBar2D();
+  translate([15,bit0Y-190,-17.5]) color([1.0,0.0,1.0]) rotate([90,0,90]) linear_extrude(height=3) DriveBar2D();
 }

@@ -32,3 +32,5 @@ bbHeight = sqrt(bbRadius*bbRadius - halfHoleDiameter * halfHoleDiameter);
 
 // If bb centres are at zero height, then the grid starts at height bbHeight - bbRadius
 
+
+bit0Y = 230; // Y pos, centre of write axis (mid-way Y between the two states)
