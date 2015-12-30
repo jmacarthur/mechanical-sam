@@ -1,6 +1,6 @@
 # Mechanical SAM
 
-![Drawing of SAM module](https://github.com/jmacarthur/mechanical-sam/overview-small.png)
+![Drawing of SAM module](https://raw.githubusercontent.com/jmacarthur/mechanical-sam/master/overview-small.png)
 
 Mechanical, binary, sequential-access memory. Shown in this image is a 3 bit x approximately 30 word memory.
 
